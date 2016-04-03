@@ -32,7 +32,7 @@ public final class TweetsCommand extends Command {
             } catch (NumberFormatException e) {
                 idAndScreenName = IdAndScreenName.getByScreenName(strings[0]);
             }
-            commandRequest.reply(UserUtils.getTimeline(idAndScreenName).toString());
+            commandRequest.reply(idAndScreenName + "'s tweets: " + UserUtils.getTimeline(idAndScreenName).toString());
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());
         } catch (AccountSuspendedException e) {

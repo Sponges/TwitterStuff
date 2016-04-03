@@ -32,7 +32,7 @@ public final class FollowingCommand extends Command {
             } catch (NumberFormatException e) {
                 idAndScreenName = IdAndScreenName.getByScreenName(strings[0]);
             }
-            commandRequest.reply(UserUtils.getFollowingPreview(idAndScreenName).toString());
+            commandRequest.reply(idAndScreenName + "'s followes: " + UserUtils.getFollowingPreview(idAndScreenName).toString());
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());
         } catch (AccountSuspendedException e) {
