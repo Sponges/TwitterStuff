@@ -16,7 +16,7 @@ import io.sponges.bot.api.module.Module;
  */
 public final class TwitterStuff extends Module {
     public TwitterStuff() {
-        super("TwitterStuff", "1.0-SNAPSHOT");
+        super("TwitterStuff", "1.1-SNAPSHOT");
     }
 
     @Override
