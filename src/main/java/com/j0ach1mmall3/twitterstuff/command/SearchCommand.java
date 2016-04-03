@@ -1,6 +1,6 @@
 package com.j0ach1mmall3.twitterstuff.command;
 
-import com.j0ach1mmall3.twitterscrapeapi.search.SearchResult;
+import com.j0ach1mmall3.twitterscrapeapi.search.SearchType;
 import com.j0ach1mmall3.twitterscrapeapi.search.SearchUtils;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
@@ -23,9 +23,7 @@ public final class SearchCommand extends Command {
             return;
         }
         try {
-            for(SearchResult searchResult : SearchUtils.search(strings[0])) {
-                commandRequest.reply("Found " + searchResult.getType().name().toLowerCase() + "s: " + searchResult.getIds());
-            }
+            commandRequest.reply("Results for " + strings[0] + ": " + SearchUtils.search(strings[0], SearchType.DEFAULT_TWEETS).getIds());
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());
         }
