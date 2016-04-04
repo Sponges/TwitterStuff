@@ -1,6 +1,9 @@
 package com.j0ach1mmall3.twitterstuff.command;
 
-import com.j0ach1mmall3.twitterscrapeapi.tweet.Tweet;
+import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
+import com.j0ach1mmall3.twitterscrapeapi.pages.tweet.TweetPage;
+import com.j0ach1mmall3.twitterscrapeapi.tweet.FullTweet;
+import com.j0ach1mmall3.twitterscrapeapi.user.UserPreview;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
 
@@ -22,18 +25,28 @@ public final class TweetCommand extends Command {
             return;
         }
         commandRequest.reply("Fetching data of " + strings[0] + "...");
-        Tweet tweet;
         try {
+            TweetPage tweetPage;
             try {
-                tweet = new Tweet(Long.valueOf(strings[0]));
+                tweetPage = new TweetPage(Long.valueOf(strings[0]));
             } catch (NumberFormatException e) {
                 commandRequest.reply("Invalid Tweet ID!");
                 return;
             }
-            tweet.fetchData();
-            commandRequest.reply(tweet.toPrettyString());
+            tweetPage.fetchData();
+            FullTweet tweet = (FullTweet) tweetPage.getTweet();
+            String s = '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
+                    "- " + tweet.getTimestamp() + " | " + tweet.getRetweets() + " Retweets | " + tweet.getLikes() + " Likes\n" +
+                    "Likers: ";
+            for(UserPreview userPreview : tweet.getLikersPreview()) {
+                s += userPreview.getScreenName() + ", ";
+            }
+            s = s.substring(0, s.length() - 2) + "...";
+            commandRequest.reply(s);
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());
+        } catch (PageNotFoundException e) {
+            commandRequest.reply("Unknown Tweet!");
         }
     }
 }
