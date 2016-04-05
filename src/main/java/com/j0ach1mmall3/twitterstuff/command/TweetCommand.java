@@ -1,9 +1,8 @@
 package com.j0ach1mmall3.twitterstuff.command;
 
 import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
-import com.j0ach1mmall3.twitterscrapeapi.pages.tweet.TweetPage;
-import com.j0ach1mmall3.twitterscrapeapi.tweet.FullTweet;
-import com.j0ach1mmall3.twitterscrapeapi.user.UserPreview;
+import com.j0ach1mmall3.twitterscrapeapi.pages.tweet.mobile.MobileTweetPage;
+import com.j0ach1mmall3.twitterscrapeapi.tweet.MobileTweet;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
 
@@ -24,24 +23,18 @@ public final class TweetCommand extends Command {
             commandRequest.reply("Arguments: <tweet id>");
             return;
         }
-        commandRequest.reply("Fetching data of " + strings[0] + "...");
         try {
-            TweetPage tweetPage;
+            MobileTweetPage tweetPage;
             try {
-                tweetPage = new TweetPage(Long.valueOf(strings[0]));
+                tweetPage = new MobileTweetPage(Long.valueOf(strings[0]));
             } catch (NumberFormatException e) {
                 commandRequest.reply("Invalid Tweet ID!");
                 return;
             }
             tweetPage.fetchData();
-            FullTweet tweet = (FullTweet) tweetPage.getTweet();
+            MobileTweet tweet = tweetPage.getTweet();
             String s = '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                    "- " + tweet.getTimestamp() + " | " + tweet.getRetweets() + " Retweets | " + tweet.getLikes() + " Likes\n" +
-                    "Likers: ";
-            for(UserPreview userPreview : tweet.getLikersPreview()) {
-                s += userPreview.getScreenName() + ", ";
-            }
-            s = s.substring(0, s.length() - 2) + "...";
+                    "- " + tweet.getTimestamp() + " | " + tweet.getRetweets() + " Retweets | " + tweet.getLikes() + " Likes";
             commandRequest.reply(s);
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());

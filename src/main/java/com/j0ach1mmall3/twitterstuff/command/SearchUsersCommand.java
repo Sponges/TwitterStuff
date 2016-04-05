@@ -1,8 +1,8 @@
 package com.j0ach1mmall3.twitterstuff.command;
 
 import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
-import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.tweets.MobileTweetsSearchPage;
-import com.j0ach1mmall3.twitterscrapeapi.tweet.Tweet;
+import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.users.MobileUsersSearchPage;
+import com.j0ach1mmall3.twitterscrapeapi.user.MobileSearchedUser;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
 
@@ -12,9 +12,9 @@ import java.io.IOException;
  * @author j0ach1mmall3 (business.j0ach1mmall3@gmail.com)
  * @since 2/04/2016
  */
-public final class SearchCommand extends Command {
-    public SearchCommand() {
-        super("Search all of Twitter for a specific keyword", "tsearch", "twittersearch", "searchtwitter");
+public final class SearchUsersCommand extends Command {
+    public SearchUsersCommand() {
+        super("Search all of Twitter for a specific user", "searchusers", "tsearchusers", "twittersearchusers", "searchtwitterusers");
     }
 
     @Override
@@ -24,21 +24,18 @@ public final class SearchCommand extends Command {
             return;
         }
         try {
-            MobileTweetsSearchPage searchPage = new MobileTweetsSearchPage(strings[0]);
+            MobileUsersSearchPage searchPage = new MobileUsersSearchPage(strings[0]);
             searchPage.fetchData();
             commandRequest.reply("Results for '" + strings[0] + "':");
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
-                for(Tweet tweet : searchPage.getSearchResult()) {
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                            "- " + tweet.getTimestamp() + '\n';
-                    commandRequest.reply(s);
+                for(MobileSearchedUser mobileSearchedUser : searchPage.getSearchResult()) {
+                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + " (" + (mobileSearchedUser.isVerified() ? 'V' : ' ') + ")\n";
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
-                    Tweet tweet = searchPage.getSearchResult().get(i);
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                            "- " + tweet.getTimestamp() + '\n';
+                    MobileSearchedUser mobileSearchedUser = searchPage.getSearchResult().get(i);
+                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + " (" + (mobileSearchedUser.isVerified() ? 'V' : ' ') + ")\n";
                 }
             }
             commandRequest.reply(s);
