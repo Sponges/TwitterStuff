@@ -30,12 +30,12 @@ public final class SearchUsersCommand extends Command {
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
                 for(MobileSearchedUser mobileSearchedUser : searchPage.getSearchResult()) {
-                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + " (" + (mobileSearchedUser.isVerified() ? 'V' : ' ') + ")\n";
+                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + (mobileSearchedUser.isVerified() ? " <Verified> " : "") + '\n';
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
                     MobileSearchedUser mobileSearchedUser = searchPage.getSearchResult().get(i);
-                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + " (" + (mobileSearchedUser.isVerified() ? 'V' : ' ') + ")\n";
+                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + (mobileSearchedUser.isVerified() ? " <Verified> " : "") + '\n';
                 }
             }
             commandRequest.reply(s);

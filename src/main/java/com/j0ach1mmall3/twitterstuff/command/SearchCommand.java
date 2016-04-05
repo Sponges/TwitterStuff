@@ -30,15 +30,12 @@ public final class SearchCommand extends Command {
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
                 for(Tweet tweet : searchPage.getSearchResult()) {
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                            "- " + tweet.getTimestamp() + '\n';
-                    commandRequest.reply(s);
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
                     Tweet tweet = searchPage.getSearchResult().get(i);
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                            "- " + tweet.getTimestamp() + '\n';
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
                 }
             }
             commandRequest.reply(s);

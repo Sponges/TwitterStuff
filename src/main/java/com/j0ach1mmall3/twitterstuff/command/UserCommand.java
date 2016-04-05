@@ -36,11 +36,11 @@ public final class UserCommand extends Command {
             }
             userPage.fetchData();
             TimelineUser user = (TimelineUser) userPage.getUser();
-            String s = user.getDisplayName() + " - @" + user.getScreenName() + " (" + (user.isVerified() ? 'V' : ' ') + ")\n" +
+            String s = user.getDisplayName() + " - @" + user.getScreenName() + (user.isVerified() ? " <Verified> " : "") + '\n' +
                     '\"' + user.getStatus() + "\"\n" +
                     user.getLocation() + " | " + user.getUrl() + " | " + user.getFollowers() + " Followers | " + user.getFollowing() + " Following\n";
             for(Tweet tweet : user.getTimeline()) {
-                s += '\"' + tweet.getMessage() + "\" - " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
+                s += '\"' + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
             }
             commandRequest.reply(s);
         } catch (IOException e) {
