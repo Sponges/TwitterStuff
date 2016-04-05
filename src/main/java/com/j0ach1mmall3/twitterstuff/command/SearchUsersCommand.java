@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class SearchUsersCommand extends Command {
     public SearchUsersCommand() {
-        super("Search all of Twitter for a specific user", "searchusers", "tsearchusers", "twittersearchusers", "searchtwitterusers");
+        super("Search all of Twitter for a specific user", "tsearchusers", "twittersearchusers", "searchtwitterusers");
     }
 
     @Override
