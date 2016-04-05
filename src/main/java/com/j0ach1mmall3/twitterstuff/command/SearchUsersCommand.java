@@ -26,7 +26,6 @@ public final class SearchUsersCommand extends Command {
         try {
             MobileUsersSearchPage searchPage = new MobileUsersSearchPage(strings[0]);
             searchPage.fetchData();
-            commandRequest.reply("Results for '" + strings[0] + "':");
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
                 for(MobileSearchedUser mobileSearchedUser : searchPage.getSearchResult()) {

@@ -26,7 +26,6 @@ public final class SearchCommand extends Command {
         try {
             MobileTweetsSearchPage searchPage = new MobileTweetsSearchPage(strings[0]);
             searchPage.fetchData();
-            commandRequest.reply("Results for '" + strings[0] + "':");
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
                 for(Tweet tweet : searchPage.getSearchResult()) {
