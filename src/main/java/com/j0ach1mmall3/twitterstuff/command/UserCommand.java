@@ -40,7 +40,7 @@ public final class UserCommand extends Command {
                     '\"' + user.getStatus() + "\"\n" +
                     user.getLocation() + " | " + user.getUrl() + " | " + user.getFollowers() + " Followers | " + user.getFollowing() + " Following\n";
             for(Tweet tweet : user.getTimeline()) {
-                s += '\"' + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
+                s += '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n";
             }
             commandRequest.reply(s);
         } catch (IOException e) {

@@ -33,8 +33,7 @@ public final class TweetCommand extends Command {
             }
             tweetPage.fetchData();
             MobileTweet tweet = tweetPage.getTweet();
-            String s = '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n" +
-                    "- " + tweet.getTimestamp() + " | " + tweet.getRetweets() + " Retweets | " + tweet.getLikes() + " Likes";
+            String s = '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ')';
             commandRequest.reply(s);
         } catch (IOException e) {
             commandRequest.reply("Uh oh, an error occured!\n" + e.getMessage());

@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class SearchCommand extends Command {
     public SearchCommand() {
-        super("Search all of Twitter for a specific keyword", "tsearch", "twittersearch", "searchtwitter");
+        super("Search all of Twitter for a specific keyword", "tsearch", "searchtweets", "tweetsearch", "tweetssearch");
     }
 
     @Override
@@ -29,12 +29,12 @@ public final class SearchCommand extends Command {
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
                 for(Tweet tweet : searchPage.getSearchResult()) {
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n";
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
                     Tweet tweet = searchPage.getSearchResult().get(i);
-                    s += '@' + tweet.getOriginalTweeter().getScreenName() + ": \"" + tweet.getMessage() + "\" | " + tweet.getTimestamp() + " (" + tweet.getId() + ")\n";
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n";
                 }
             }
             commandRequest.reply(s);
