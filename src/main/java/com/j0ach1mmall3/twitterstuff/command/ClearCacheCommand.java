@@ -15,8 +15,9 @@ public final class ClearCacheCommand extends Command {
 
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
-        if(!commandRequest.getUser().isOp() || !commandRequest.getUser().getUsername().isPresent() || !commandRequest.getUser().getUsername().get().equals("joachim.vandersmissen")) return;
-        DocumentCache.clearCache();
-        commandRequest.reply("Cleared the Cache!");
+        if(commandRequest.getUser().isOp() || (commandRequest.getUser().getUsername().isPresent() && commandRequest.getUser().getUsername().get().equals("joachim.vandersmissen"))) {
+            DocumentCache.clearCache();
+            commandRequest.reply("Cleared the Cache!");
+        }
     }
 }
