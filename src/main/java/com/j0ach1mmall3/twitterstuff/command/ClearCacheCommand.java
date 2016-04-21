@@ -20,4 +20,9 @@ public final class ClearCacheCommand extends Command {
             commandRequest.reply("Cleared the Cache!");
         }
     }
+    
+    @Override
+    public boolean requiresOp() {
+        return true;
+    }
 }
