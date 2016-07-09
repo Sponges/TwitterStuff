@@ -1,9 +1,10 @@
-package com.j0ach1mmall3.twitterstuff.command;
+package com.j0ach1mmall3.twitterstuff.commands;
 
 import java.io.IOException;
 
 import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
-import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.images.MobileImagesSearchPage;
+import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.tweets.MobileTweetsSearchPage;
+import com.j0ach1mmall3.twitterscrapeapi.tweet.Tweet;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
 
@@ -11,9 +12,9 @@ import io.sponges.bot.api.cmd.CommandRequest;
  * @author j0ach1mmall3 (business.j0ach1mmall3@gmail.com)
  * @since 2/04/2016
  */
-public final class SearchImagesCommand extends Command {
-    public SearchImagesCommand() {
-        super("Search all of Twitter for specific images", "tsearchimages");
+public final class SearchCommand extends Command {
+    public SearchCommand() {
+        super("Search all of Twitter for a specific keyword", "tsearch");
     }
 
     @Override
@@ -27,16 +28,17 @@ public final class SearchImagesCommand extends Command {
             for(String s : strings) {
                 keywords += s + ' ';
             }
-            MobileImagesSearchPage searchPage = new MobileImagesSearchPage(keywords);
+            MobileTweetsSearchPage searchPage = new MobileTweetsSearchPage(keywords);
             searchPage.fetchData();
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
-                for(String image : searchPage.getSearchResult()) {
-                    s += image + '\n';
+                for(Tweet tweet : searchPage.getSearchResult()) {
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n";
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
-                    s += searchPage.getSearchResult().get(i) + '\n';
+                    Tweet tweet = searchPage.getSearchResult().get(i);
+                    s += '@' + tweet.getOriginalTweeter().getScreenName() + " on " + tweet.getTimestamp() + ": \"" + tweet.getMessage() + "\" (" + tweet.getId() + ")\n";
                 }
             }
             commandRequest.reply(s);

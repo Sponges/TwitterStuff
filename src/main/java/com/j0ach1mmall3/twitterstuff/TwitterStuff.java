@@ -1,11 +1,11 @@
 package com.j0ach1mmall3.twitterstuff;
 
-import com.j0ach1mmall3.twitterstuff.command.ClearCacheCommand;
-import com.j0ach1mmall3.twitterstuff.command.SearchCommand;
-import com.j0ach1mmall3.twitterstuff.command.SearchImagesCommand;
-import com.j0ach1mmall3.twitterstuff.command.SearchUsersCommand;
-import com.j0ach1mmall3.twitterstuff.command.TweetCommand;
-import com.j0ach1mmall3.twitterstuff.command.UserCommand;
+import com.j0ach1mmall3.twitterstuff.commands.ClearCacheCommand;
+import com.j0ach1mmall3.twitterstuff.commands.SearchCommand;
+import com.j0ach1mmall3.twitterstuff.commands.SearchImagesCommand;
+import com.j0ach1mmall3.twitterstuff.commands.SearchUsersCommand;
+import com.j0ach1mmall3.twitterstuff.commands.TweetCommand;
+import com.j0ach1mmall3.twitterstuff.commands.UserCommand;
 import io.sponges.bot.api.cmd.CommandManager;
 import io.sponges.bot.api.module.Module;
 

@@ -1,4 +1,4 @@
-package com.j0ach1mmall3.twitterstuff.command;
+package com.j0ach1mmall3.twitterstuff.commands;
 
 import java.io.IOException;
 
@@ -21,12 +21,12 @@ public final class TweetCommand extends Command {
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
         if(strings.length < 1) {
-            commandRequest.reply("Arguments: <tweet id>");
-            commandRequest.reply("Alternatively, you can use:");
-            commandRequest.reply("-tsearch <keywords>, to search Twitter");
-            commandRequest.reply("-tsearchimages <keywords>, to search images on Twitter");
-            commandRequest.reply("-tsearchusers <keywords>, to search users on Twitter");
-            commandRequest.reply("-tuser <username|userid>, to display user information");
+            commandRequest.reply("Arguments: <tweet id>\n" +
+                    "Alternatively, you can use:\n" +
+                    "-tsearch <keywords>, to search Twitter\n" +
+                    "-tsearchimages <keywords>, to search images on Twitter\n" +
+                    "-tsearchusers <keywords>, to search users on Twitter\n" +
+                    "-tuser <username|userid>, to display user information");
             return;
         }
         try {

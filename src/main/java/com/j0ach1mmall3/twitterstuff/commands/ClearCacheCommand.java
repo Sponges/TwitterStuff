@@ -1,4 +1,4 @@
-package com.j0ach1mmall3.twitterstuff.command;
+package com.j0ach1mmall3.twitterstuff.commands;
 
 import com.j0ach1mmall3.twitterscrapeapi.jsoup.DocumentCache;
 import io.sponges.bot.api.cmd.Command;
