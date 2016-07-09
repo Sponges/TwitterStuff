@@ -1,12 +1,12 @@
 package com.j0ach1mmall3.twitterstuff.command;
 
+import java.io.IOException;
+
 import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
 import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.tweets.MobileTweetsSearchPage;
 import com.j0ach1mmall3.twitterscrapeapi.tweet.Tweet;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
-
-import java.io.IOException;
 
 /**
  * @author j0ach1mmall3 (business.j0ach1mmall3@gmail.com)
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public final class SearchCommand extends Command {
     public SearchCommand() {
-        super("Search all of Twitter for a specific keyword", "tsearch", "searchtweets", "tweetsearch", "tweetssearch");
+        super("Search all of Twitter for a specific keyword", "tsearch");
     }
 
     @Override

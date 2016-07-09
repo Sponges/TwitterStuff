@@ -2,6 +2,7 @@ package com.j0ach1mmall3.twitterstuff;
 
 import com.j0ach1mmall3.twitterstuff.command.ClearCacheCommand;
 import com.j0ach1mmall3.twitterstuff.command.SearchCommand;
+import com.j0ach1mmall3.twitterstuff.command.SearchImagesCommand;
 import com.j0ach1mmall3.twitterstuff.command.SearchUsersCommand;
 import com.j0ach1mmall3.twitterstuff.command.TweetCommand;
 import com.j0ach1mmall3.twitterstuff.command.UserCommand;
@@ -14,7 +15,7 @@ import io.sponges.bot.api.module.Module;
  */
 public final class TwitterStuff extends Module {
     public TwitterStuff() {
-        super("TwitterStuff", "1.3.5");
+        super("TwitterStuff", "1.4.0");
     }
 
     @Override
@@ -23,6 +24,7 @@ public final class TwitterStuff extends Module {
         cm.registerCommand(this, new ClearCacheCommand());
         cm.registerCommand(this, new SearchCommand());
         cm.registerCommand(this, new SearchUsersCommand());
+        cm.registerCommand(this, new SearchImagesCommand());
         cm.registerCommand(this, new TweetCommand());
         cm.registerCommand(this, new UserCommand());
     }

@@ -15,7 +15,7 @@ public final class ClearCacheCommand extends Command {
 
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
-        if(commandRequest.getUser().isOp() || (commandRequest.getClient().getId().equals("skype") && commandRequest.getUser().getId().equals("joachim.vandersmissen"))) {
+        if(commandRequest.getUser().hasPermission("twitterstuff.clearcache")) {
             DocumentCache.clearCache();
             commandRequest.reply("Cleared the Cache!");
         }

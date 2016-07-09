@@ -14,13 +14,13 @@
         <dependency>
             <groupId>com.github.Sponges</groupId>
             <artifactId>BotModuleAPI</artifactId>
-            <version>5bde0f4ccf</version>
+            <version>75ebef32b5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.j0ach1mmall3</groupId>
             <artifactId>TwitterScrapeAPI</artifactId>
-            <version>Build-17</version>
+            <version>LATEST</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

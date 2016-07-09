@@ -3,8 +3,7 @@ package com.j0ach1mmall3.twitterstuff.command;
 import java.io.IOException;
 
 import com.j0ach1mmall3.twitterscrapeapi.exceptions.PageNotFoundException;
-import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.users.MobileUsersSearchPage;
-import com.j0ach1mmall3.twitterscrapeapi.user.MobileSearchedUser;
+import com.j0ach1mmall3.twitterscrapeapi.pages.search.mobile.images.MobileImagesSearchPage;
 import io.sponges.bot.api.cmd.Command;
 import io.sponges.bot.api.cmd.CommandRequest;
 
@@ -12,9 +11,9 @@ import io.sponges.bot.api.cmd.CommandRequest;
  * @author j0ach1mmall3 (business.j0ach1mmall3@gmail.com)
  * @since 2/04/2016
  */
-public final class SearchUsersCommand extends Command {
-    public SearchUsersCommand() {
-        super("Search all of Twitter for a specific user", "tsearchusers");
+public final class SearchImagesCommand extends Command {
+    public SearchImagesCommand() {
+        super("Search all of Twitter for specific images", "tsearchimages");
     }
 
     @Override
@@ -24,17 +23,16 @@ public final class SearchUsersCommand extends Command {
             return;
         }
         try {
-            MobileUsersSearchPage searchPage = new MobileUsersSearchPage(strings[0]);
+            MobileImagesSearchPage searchPage = new MobileImagesSearchPage(strings[0]);
             searchPage.fetchData();
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {
-                for(MobileSearchedUser mobileSearchedUser : searchPage.getSearchResult()) {
-                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + (mobileSearchedUser.isVerified() ? " <Verified> " : "") + '\n';
+                for(String image : searchPage.getSearchResult()) {
+                    s += image + '\n';
                 }
             } else {
                 for(int i = 0;i < 3;i++) {
-                    MobileSearchedUser mobileSearchedUser = searchPage.getSearchResult().get(i);
-                    s += '@' + mobileSearchedUser.getScreenName() + " - " + mobileSearchedUser.getDisplayName() + (mobileSearchedUser.isVerified() ? " <Verified> " : "") + '\n';
+                    s += searchPage.getSearchResult().get(i) + '\n';
                 }
             }
             commandRequest.reply(s);
