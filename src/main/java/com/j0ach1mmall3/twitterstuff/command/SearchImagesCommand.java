@@ -19,11 +19,15 @@ public final class SearchImagesCommand extends Command {
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
         if(strings.length < 1) {
-            commandRequest.reply("Arguments: <keyword>");
+            commandRequest.reply("Arguments: <keywords>");
             return;
         }
         try {
-            MobileImagesSearchPage searchPage = new MobileImagesSearchPage(strings[0]);
+            String keywords = "";
+            for(String s : strings) {
+                keywords += s + ' ';
+            }
+            MobileImagesSearchPage searchPage = new MobileImagesSearchPage(keywords);
             searchPage.fetchData();
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {

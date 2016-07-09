@@ -20,11 +20,15 @@ public final class SearchCommand extends Command {
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
         if(strings.length < 1) {
-            commandRequest.reply("Arguments: <keyword>");
+            commandRequest.reply("Arguments: <keywords>");
             return;
         }
         try {
-            MobileTweetsSearchPage searchPage = new MobileTweetsSearchPage(strings[0]);
+            String keywords = "";
+            for(String s : strings) {
+                keywords += s + ' ';
+            }
+            MobileTweetsSearchPage searchPage = new MobileTweetsSearchPage(keywords);
             searchPage.fetchData();
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {

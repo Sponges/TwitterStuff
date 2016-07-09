@@ -20,11 +20,15 @@ public final class SearchUsersCommand extends Command {
     @Override
     public void onCommand(CommandRequest commandRequest, String[] strings) {
         if(strings.length < 1) {
-            commandRequest.reply("Arguments: <keyword>");
+            commandRequest.reply("Arguments: <keywords>");
             return;
         }
         try {
-            MobileUsersSearchPage searchPage = new MobileUsersSearchPage(strings[0]);
+            String keywords = "";
+            for(String s : strings) {
+                keywords += s + ' ';
+            }
+            MobileUsersSearchPage searchPage = new MobileUsersSearchPage(keywords);
             searchPage.fetchData();
             String s = "";
             if(searchPage.getSearchResult().size() < 3) {

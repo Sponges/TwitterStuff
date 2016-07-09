@@ -22,6 +22,11 @@ public final class TweetCommand extends Command {
     public void onCommand(CommandRequest commandRequest, String[] strings) {
         if(strings.length < 1) {
             commandRequest.reply("Arguments: <tweet id>");
+            commandRequest.reply("Alternatively, you can use:");
+            commandRequest.reply("-tsearch <keywords>, to search Twitter");
+            commandRequest.reply("-tsearchimages <keywords>, to search images on Twitter");
+            commandRequest.reply("-tsearchusers <keywords>, to search users on Twitter");
+            commandRequest.reply("-tuser <username|userid>, to display user information");
             return;
         }
         try {
