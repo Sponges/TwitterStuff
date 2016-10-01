@@ -21,12 +21,12 @@ public final class TwitterStuff extends Module {
     @Override
     public void onEnable() {
         CommandManager cm = this.getCommandManager();
-        cm.registerCommand(this, new ClearCacheCommand());
-        cm.registerCommand(this, new SearchCommand());
-        cm.registerCommand(this, new SearchUsersCommand());
-        cm.registerCommand(this, new SearchImagesCommand());
-        cm.registerCommand(this, new TweetCommand());
-        cm.registerCommand(this, new UserCommand());
+        cm.registerCommand(new ClearCacheCommand());
+        cm.registerCommand(new SearchCommand());
+        cm.registerCommand(new SearchUsersCommand());
+        cm.registerCommand(new SearchImagesCommand());
+        cm.registerCommand(new TweetCommand());
+        cm.registerCommand(new UserCommand());
     }
 
     @Override
